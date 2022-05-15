@@ -1,7 +1,6 @@
 import getpass
 import platform
 import psutil
-import wmi
 import socket
 import requests
 
