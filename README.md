@@ -7,8 +7,7 @@
     $ python3 iron.py
 
 **Пример результата / Result Example**
-
-
+                                    
                                     User: JOHN\john19889
                                     Primary Owner Email: john1989@outlook.com
                                     Manufacturer: HP
