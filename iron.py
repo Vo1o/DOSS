@@ -1,7 +1,6 @@
 import getpass
 import platform
 import psutil
-import wmi
 import socket
 import requests
 
@@ -32,6 +31,7 @@ swap = psutil.swap_memory()
 ip = requests.get('https://ip.42.pl/json').text
 
 try:
+    import wmi
     computer = wmi.WMI()
     computer_info = computer.Win32_ComputerSystem()[0]
     os_info = computer.Win32_OperatingSystem()[0]
