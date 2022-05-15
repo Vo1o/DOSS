@@ -8,7 +8,7 @@
 
 **Пример результата / Result Example**
                                     
->                                        User: JOHN\john19889
+>     User: JOHN\john19889
 >                                        Primary Owner Email: john1989@outlook.com
 >                                        Manufacturer: HP
 > ██████╗░░█████╗░░██████╗░██████╗       Model PC: ваша модель ПК/your PC model
