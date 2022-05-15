@@ -1,3 +1,5 @@
+# Утилита для получении справки о ПК / PC help utility
+
 **Установка / Installation**
 
     $ git clone https://github.com/Vo1o/DOSS
