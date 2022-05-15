@@ -3,8 +3,7 @@
 **Установка / Installation**
 
     $ git clone https://github.com/Vo1o/DOSS
-    
-    
+
     $ pip install -r requirements.txt
 
 **Использование / Usage**
