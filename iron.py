@@ -28,15 +28,16 @@ hostname = socket. gethostname()
 local_ip = socket. gethostbyname(hostname)
 svmem = psutil.virtual_memory()
 swap = psutil.swap_memory()
-computer = wmi.WMI()
-computer_info = computer.Win32_ComputerSystem()[0]
-os_info = computer.Win32_OperatingSystem()[0]
-proc_info = computer.Win32_Processor()[0]
-gpu_info = computer.Win32_VideoController()[0]
+
 ip = requests.get('https://ip.42.pl/json').text
-model_os = os_info.Name.replace('|C:\WINDOWS|\Device\Harddisk0\Partition3', '')
 
 try:
+    computer = wmi.WMI()
+    computer_info = computer.Win32_ComputerSystem()[0]
+    os_info = computer.Win32_OperatingSystem()[0]
+    proc_info = computer.Win32_Processor()[0]
+    gpu_info = computer.Win32_VideoController()[0]
+    model_os = os_info.Name.replace('|C:\WINDOWS|\Device\Harddisk0\Partition3', '')
     print(f'''{R}
                                         User: {computer_info.UserName}  
                                         Primary Owner Email: {computer_info.PrimaryOwnerName}          
