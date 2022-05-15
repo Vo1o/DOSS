@@ -1,10 +1,10 @@
 **Установка / Installation**
 
-$ git clone https://github.com/Vo1o/info_iron
+    $ git clone https://github.com/Vo1o/info_iron
 
 **Использование / Usage**
 
-$ python3 iron.py
+    $ python3 iron.py
 
 **Пример результата / Result Example**
 
