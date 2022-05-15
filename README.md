@@ -1,6 +1,6 @@
 **Установка / Installation**
 
-    $ git clone https://github.com/Vo1o/info_iron
+    $ git clone https://github.com/Vo1o/DOSS
 
 **Использование / Usage**
 
