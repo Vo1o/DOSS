@@ -3,8 +3,9 @@
 **Установка / Installation**
 
     $ git clone https://github.com/Vo1o/DOSS
-**Установка необходимых библиотек / Installing the required libraries*'
+**Установка необходимых библиотек / Installing the required libraries**
     $ pip install -r requirements.txt
+
 **Использование / Usage**
 
     $ python3 iron.py
