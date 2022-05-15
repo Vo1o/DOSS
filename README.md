@@ -1,4 +1,4 @@
-# Утилита для получении справки о ПК / PC help utility
+# DOSS — инструмент для сбора системной информации, написанный на Python. / DOSS is a system information gathering tool written in Python.
 
 **Установка / Installation**
 
