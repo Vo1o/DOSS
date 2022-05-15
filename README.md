@@ -8,9 +8,9 @@
 
 **Пример результата / Result Example**
                                     
-User: JOHN\john19889
->                                        Primary Owner Email: john1989@outlook.com
->                                        Manufacturer: HP
+> User: JOHN\john19889
+> Primary Owner Email: john1989@outlook.com
+> Manufacturer: HP
 > ██████╗░░█████╗░░██████╗░██████╗       Model PC: ваша модель ПК/your PC model
 > ██╔══██╗██╔══██╗██╔════╝██╔════╝       Model OS: Майкрософт Windows 11 Домашняя для одного языка
 > ██║░░██║██║░░██║╚█████╗░╚█████╗░       Distro: 10.0.22000 AMD64
