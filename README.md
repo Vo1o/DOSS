@@ -25,4 +25,4 @@
 >                                           
 >                                           LAN_IP: 198.168.0.150
 >                                           
-**>                                           WAN_IP: ваш айпи/your ip
+**                                          WAN_IP: ваш айпи/your ip**
