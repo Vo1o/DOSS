@@ -1,4 +1,5 @@
-# DOSS — инструмент для сбора системной информации, написанный на Python. / DOSS is a system information gathering tool written in Python.
+# DOSS
+## DOSS — инструмент для сбора системной информации, написанный на Python. / DOSS is a system information gathering tool written in Python.
 
 **Установка / Installation**
 
