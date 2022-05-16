@@ -18,4 +18,4 @@
 
 **Пример результата / Result Example**
 
-<img src="https://user-images.githubusercontent.com/92124716/168521905-ec5d020c-92b4-4370-a6f7-f611cd9e8719.png" alt="neofetch" height="240px">
+<img src="https://user-images.githubusercontent.com/92124716/168540402-416c9b0c-6596-4e3c-aa31-92e41482c815.png" alt="DOSS_examples" height="240px">
