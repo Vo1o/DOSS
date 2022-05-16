@@ -1,12 +1,3 @@
-<script src="https://cdn.lordicon.com/xdjxvujz.js"></script>
-<lord-icon
-
-    src="https://cdn.lordicon.com/kecapeqm.json"
-
-    trigger="loop"
-
-    style="width:250px;height:250px">
-</lord-icon>
 <p align="center"><img alt="DOSS" src="https://user-images.githubusercontent.com/92124716/168519702-9b5de45e-0e43-4b86-bf2d-ff11c97e5993.png"></p>
 <p align="center">DOSS — инструмент для сбора системной информации, написанный на Python. / DOSS is a system information gathering tool written in Python.
 </p>
