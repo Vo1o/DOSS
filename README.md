@@ -17,4 +17,5 @@
     $ python3 iron.py
 
 **Пример результата / Result Example**
-<h1 align="center"><img src="https://user-images.githubusercontent.com/92124716/168521519-318f4541-5aaa-41fa-ad1f-61e38a55af32.png" alt="examples" height="250px"></h1> 
+<h1 align="center"><img src="https://user-images.githubusercontent.com/92124716/168521905-ec5d020c-92b4-4370-a6f7-f611cd9e8719.png" alt="examples" height="250px"></h1> 
+<img src="https://user-images.githubusercontent.com/92124716/168521905-ec5d020c-92b4-4370-a6f7-f611cd9e8719.png" alt="neofetch" align="right" height="240px">
