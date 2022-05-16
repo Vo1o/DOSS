@@ -18,4 +18,4 @@
 
 **Пример результата / Result Example**
 
-<img src="https://user-images.githubusercontent.com/92124716/168521905-ec5d020c-92b4-4370-a6f7-f611cd9e8719.png" alt="neofetch" height="300px">
+<img src="https://user-images.githubusercontent.com/92124716/168521905-ec5d020c-92b4-4370-a6f7-f611cd9e8719.png" alt="neofetch" height="255px">
