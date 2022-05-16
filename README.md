@@ -17,12 +17,13 @@
     $ python3 iron.py
 
 **Пример результата / Result Example**
+<p align="center"><img alt="DOSS Examples" src="https://user-images.githubusercontent.com/92124716/168540402-416c9b0c-6596-4e3c-aa31-92e41482c815.png" "></p>
 
 <img src="https://user-images.githubusercontent.com/92124716/168540402-416c9b0c-6596-4e3c-aa31-92e41482c815.png" alt="DOSS_examples" height="240px">
                                 
-| Команда       | Справка по команде |
-| ------------- | ------------------ |
-| User          | пользователь       |
+| Команда        | Справка по команде  |
+| :------------- | :------------------ |
+| User           | пользователь        |
 | Primary Owner Email | электронный адрес основного пользователя  |
 | Manufacturer  | производитель ПК   |
 | Model PC | модель компьютера  |
