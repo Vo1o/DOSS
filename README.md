@@ -2,7 +2,7 @@
 <p align="center">DOSS — инструмент для сбора системной информации, написанный на Python. / DOSS is a system information gathering tool written in Python.
 </p>
 <p align="center">
-<a href="./LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
+<a href="./LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
 </p>
 
 **Установка / Installation**
