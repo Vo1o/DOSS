@@ -1,4 +1,4 @@
-<p align="center"><img alt="DOSS" src="https://user-images.githubusercontent.com/92124716/168540402-416c9b0c-6596-4e3c-aa31-92e41482c815.png"></p>
+<p align="center"><img alt="DOSS" src="https://user-images.githubusercontent.com/92124716/168519702-9b5de45e-0e43-4b86-bf2d-ff11c97e5993.png"></p>
 <p align="center">DOSS — инструмент для сбора системной информации, написанный на Python. / DOSS is a system information gathering tool written in Python.
 </p>
 <p align="center">
