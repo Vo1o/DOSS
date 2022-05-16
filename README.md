@@ -1,4 +1,4 @@
-<h3 align="center"><img src="https://user-images.githubusercontent.com/92124716/168519702-9b5de45e-0e43-4b86-bf2d-ff11c97e5993.png" alt="logo" height="500px"></h3>
+<h3 align="center"><img src="https://user-images.githubusercontent.com/92124716/168519702-9b5de45e-0e43-4b86-bf2d-ff11c97e5993.png" alt="logo" height="250px"></h3>
 <p align="center">DOSS</p>
 <p align="center">
 <a href="./LICENSE.md"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>
