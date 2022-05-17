@@ -2,3 +2,5 @@ getpass4
 psutil
 requests
 WMI
+py-cpuinfo
+distro
