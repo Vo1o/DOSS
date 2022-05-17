@@ -9,12 +9,10 @@ from subprocess import Popen, PIPE
 import shutil
 import distro
 import cpuinfo
+import ctypes
+from rich.console import Console
 
-R = '\033[31m'  # red
-G = '\033[32m'  # green
-C = '\033[36m'  # cyan
-W = '\033[0m'   # white
-Y = '\033[33m'  # yellow
+console = Console()
 
 partitions = psutil.disk_partitions()
 for partition in partitions:
@@ -95,7 +93,10 @@ hostname = socket.gethostname()
 local_ip = socket.gethostbyname(hostname)
 svmem = psutil.virtual_memory()
 swap = psutil.swap_memory()
-ip = requests.get('https://ip.42.pl/json').text
+ip = powershell("Invoke-RestMethod ifconfig.me/ip")
+shell = powershell('"PowerShell v$($PSVersionTable.PSVersion)"')
+color = powershell("('{0}[0;40m{1}{0}{0}[0;40m{1}{0}{0}[0;40m{1}{0}[0;41m{1}{0}[0;41m{1}{0}[0;41m{1}{0}[0;42m{1}{0}[0;42m{1}{0}[0;42m{1}{0}[0;43m{1}{0}[0;43m{1}{0}[0;43m{1}{0}[0;44m{1}{0}[0;44m{1}{0}[0;44m{1}{0}[0;45m{1}{0}[0;45m{1}{0}[0;45m{1}{0}[0;46m{1}{0}[0;46m{1}{0}[0;46m{1}{0}[0;47m{1}{0}[0;47m{1}{0}[0;47m{1}{0}[0m') -f [char]0x1B, '   '")
+color_ = powershell("('{0}[0;100m{1}{0}{0}[0;100m{1}{0}{0}[0;100m{1}{0}[0;101m{1}{0}[0;101m{1}{0}[0;101m{1}{0}[0;102m{1}{0}[0;102m{1}{0}[0;102m{1}{0}[0;103m{1}{0}[0;103m{1}{0}[0;103m{1}{0}[0;104m{1}{0}[0;104m{1}{0}[0;104m{1}{0}[0;105m{1}{0}[0;105m{1}{0}[0;105m{1}{0}[0;106m{1}{0}[0;106m{1}{0}[0;106m{1}{0}[0;107m{1}{0}[0;107m{1}{0}[0;107m{1}{0}[0m') -f [char]0x1B, '   '")
 
 try:
     import wmi
@@ -106,30 +107,36 @@ try:
     cpu = powershell(" Get-WmiObject Win32_Processor | Format-list Name").split(":")[1].replace('\n', '').strip()
     gpu_info = computer.Win32_VideoController()[0]
     model_os = os_info.Name.split("|")[0].replace("Майкрософт ", "").replace("Microsoft", "")
-    print(f'''{R}
-                                    User: {computer_info.UserName}  
-                                    Hostname: {proc_info.SystemName}
-                                    Primary Owner Email: {computer_info.PrimaryOwnerName}          
-                                    Manufacturer: {motherboard()}   
-██████╗░░█████╗░░██████╗░██████╗    Model PC: {computer_info.Model} {platform.architecture()[1]}
-██╔══██╗██╔══██╗██╔════╝██╔════╝    Model OS: {model_os}
-██║░░██║██║░░██║╚═███═╗░╚═███═╗░    Distro: {platform.version()} {platform.machine()}
-██║░░██║██║░░██║╚█████╗░╚█████╗░    Uptime: {uptime()}
-██║░░██║██║░░██║░╚═══██╗░╚═══██╗    CPU: {cpu} @ {proc_info.CurrentClockSpeed/1000}GHz
-██████╔╝╚█████╔╝██████╔╝██████╔╝    GPU: {gpu_info.Name} {int(gpu_info.MaxRefreshRate*0.1)}GB
-╚═════╝░░╚════╝░╚═════╝░╚═════╝░    RAM: {get_size(svmem.available)}/{get_size(svmem.total)} ({round(svmem.used / svmem.total * 100, 2)}%)
-                                    Disk: {disk_name()}
-                                    LAN_IP: {local_ip}
-                                    WAN_IP: {ip}
-    ''')
+    console.print(f'''
+                                  [bold yellow]User[/bold yellow]: [white]{computer_info.UserName}[/white]
+                                  [bold yellow]Hostname[/bold yellow]: [white]{proc_info.SystemName}[/white]
+                                  [bold yellow]Primary Owner Email[/bold yellow]: [white]{computer_info.PrimaryOwnerName}[/white]
+                                  [bold yellow]Manufacturer[/bold yellow]: [white]{motherboard()}[/white]
+[red]██████╗░░█████╗░░██████╗░██████╗[/red]  [bold yellow]Model PC[/bold yellow]: [white]{computer_info.Model}[/white]
+[red]██╔══██╗██╔══██╗██╔════╝██╔════╝[/red]  [bold yellow]Model OS[/bold yellow]: [white]{model_os}[/white]
+[red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Kernel[/bold yellow]: [white]{platform.version()} {platform.machine()}[/white]
+[red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red]  [bold yellow]Uptime[/bold yellow]: [white]{uptime()}[/white]
+[red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red]  [bold yellow]Shell[/bold yellow]: [white]{shell}[/white]
+[red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Resolution[/bold yellow]: [white]{ctypes.windll.user32.GetSystemMetrics(0)}x{ctypes.windll.user32.GetSystemMetrics(1)}[/white]
+[red]██║░░██║██║░░██║░╚═══██╗░╚═══██╗[/red]  [bold yellow]CPU[/bold yellow]: [white]{cpu} @ {proc_info.CurrentClockSpeed/1000}GHz[/white]
+[red]██████╔╝╚█████╔╝██████╔╝██████╔╝[/red]  [bold yellow]GPU[/bold yellow]: [white]{gpu_info.Name} {int(gpu_info.MaxRefreshRate*0.1)}GB[/white]
+[red]╚═════╝░░╚════╝░╚═════╝░╚═════╝░[/red]  [bold yellow]RAM[/bold yellow]: [white]{get_size(svmem.available)}/{get_size(svmem.total)} ({round(svmem.used / svmem.total * 100, 2)}%)[/white]
+                                  [bold yellow]Disk[/bold yellow]: [white]{disk_name()}[/white]
+                                  [bold yellow]LAN_IP[/bold yellow]: [white]{local_ip}[/white]
+                                  [bold yellow]WAN_IP[/bold yellow]: [white]{ip}[/white]
+''')
+    print(f'''                                  {color}
+                                  {color_}
+''')
 except:
     print(f'''{R}
                                         User: {getpass.getuser()}
                                         Hostname: {hostname}
     ██████╗░░█████╗░░██████╗░██████╗    Model OS: {platform.system()} {platform.release()}    
-    ██╔══██╗██╔══██╗██╔════╝██╔════╝    Distro: {distro.name()}
-    ██║░░██║██║░░██║╚█████╗░╚═███═╗░    Uptime: {uptime()}
-    ██║░░██║██║░░██║╚█████╗░╚█████╗░    CPU: {cpuinfo.get_cpu_info()['brand_raw']} @ { cpuinfo.get_cpu_info()['hz_actual_friendly']}
+    ██╔══██╗██╔══██╗██╔════╝██╔════╝    Kernel: {distro.name()}
+    ██║░░██║██║░░██║╚═███═╗░╚═███═╗░    Uptime: {uptime()}
+    ██║░░██║██║░░██║╚█████╗░╚█████╗░    Resolution: {ctypes.windll.user32.GetSystemMetrics(0)}x{ctypes.windll.user32.GetSystemMetrics(1)}
+    ██║░░██║██║░░██║╚═███═╗░╚═███═╗░    CPU: {cpuinfo.get_cpu_info()['brand_raw']} @ { cpuinfo.get_cpu_info()['hz_actual_friendly']}
     ██║░░██║██║░░██║░╚═══██╗░╚═══██╗    RAM: {get_size(svmem.available)}/{get_size(svmem.total)} ({round(svmem.used / svmem.total * 100, 2)}%)
     ██████╔╝╚█████╔╝██████╔╝██████╔╝    Disk {disk_name()}
     ╚═════╝░░╚════╝░╚═════╝░╚═════╝░    LAN_IP: {local_ip}
