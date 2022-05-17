@@ -1,16 +1,16 @@
+import cpuinfo
+import ctypes
+import distro
 import getpass
 import platform
 import psutil
-import socket
-import requests
-import time
 import re
-from subprocess import Popen, PIPE
-import shutil
-import distro
-import cpuinfo
-import ctypes
+import requests
 from rich.console import Console
+import shutil
+import socket
+from subprocess import Popen, PIPE
+import time
 
 console = Console()
 
