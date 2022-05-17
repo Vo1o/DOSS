@@ -8,6 +8,7 @@ import re
 from subprocess import Popen, PIPE
 import shutil
 import distro
+import cpuinfo
 
 R = '\033[31m'  # red
 G = '\033[32m'  # green
@@ -127,7 +128,8 @@ except:
                                         Hostname: {hostname}
     ██████╗░░█████╗░░██████╗░██████╗    Model OS: {platform.system()} {platform.release()}    
     ██╔══██╗██╔══██╗██╔════╝██╔════╝    Distro: {distro.name()}
-    ██║░░██║██║░░██║╚█████╗░╚█████╗░    CPU: {platform.processor()}
+    ██║░░██║██║░░██║╚█████╗░╚═███═╗░    Uptime: {uptime()}
+    ██║░░██║██║░░██║╚█████╗░╚█████╗░    CPU: {cpuinfo.get_cpu_info()['brand_raw']} @ { cpuinfo.get_cpu_info()['hz_actual_friendly']}
     ██║░░██║██║░░██║░╚═══██╗░╚═══██╗    RAM: {get_size(svmem.available)}/{get_size(svmem.total)} ({round(svmem.used / svmem.total * 100, 2)}%)
     ██████╔╝╚█████╔╝██████╔╝██████╔╝    Disk {disk_name()}
     ╚═════╝░░╚════╝░╚═════╝░╚═════╝░    LAN_IP: {local_ip}
