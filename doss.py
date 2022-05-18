@@ -129,7 +129,7 @@ try:
                                   {color_}
 ''')
 except:
-    print(f'''{R}
+    print(f'''
                                         User: {getpass.getuser()}
                                         Hostname: {hostname}
     ██████╗░░█████╗░░██████╗░██████╗    Model OS: {platform.system()} {platform.release()}    
