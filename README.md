@@ -7,14 +7,14 @@
 
 **Установка / Installation**
 
-    $ git clone https://github.com/Vo1o/DOSS
+     git clone https://github.com/Vo1o/DOSS
 **Установка необходимых библиотек / Installing the required libraries**
     
-    $ pip install -r requirements.txt
+     pip install -r requirements.txt
 
 **Использование / Usage**
 
-    $ python3 doss.py
+     python3 doss.py
 
 **Пример результата / Result Example**
 <p align="center"><img alt="DOSS Examples" src="https://user-images.githubusercontent.com/92124716/168540402-416c9b0c-6596-4e3c-aa31-92e41482c815.png"></p>
