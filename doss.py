@@ -11,6 +11,7 @@ import shutil
 import socket
 from subprocess import Popen, PIPE
 import time
+import os
 
 console = Console()
 
@@ -131,13 +132,14 @@ try:
 ''')
 except:
     ip = requests.get("https://ip.42.pl/json").text
+    resolution = os.system("xrandr -q | grep '\*'")
     print(f'''
                                       User: {getpass.getuser()}
                                       Hostname: {hostname}
     ██████╗░░█████╗░░██████╗░██████╗  Model OS: {platform.system()} {platform.release()}    
     ██╔══██╗██╔══██╗██╔════╝██╔════╝  Kernel: {distro.name()}
     ██║░░██║██║░░██║╚═███═╗░╚═███═╗░  Uptime: {uptime()}
-    ██║░░██║██║░░██║╚█████╗░╚█████╗░  Resolution: {ctypes.windll.user32.GetSystemMetrics(0)}x{ctypes.windll.user32.GetSystemMetrics(1)}
+    ██║░░██║██║░░██║╚█████╗░╚█████╗░  Resolution: {resolution}
     ██║░░██║██║░░██║╚═███═╗░╚═███═╗░  CPU: {cpuinfo.get_cpu_info()['brand_raw']} @ { cpuinfo.get_cpu_info()['hz_actual_friendly']}
     ██║░░██║██║░░██║░╚═══██╗░╚═══██╗  RAM: {get_size(svmem.available)}/{get_size(svmem.total)} ({round(svmem.used / svmem.total * 100, 2)}%)
     ██████╔╝╚█████╔╝██████╔╝██████╔╝  Disk {disk_name()}
