@@ -144,7 +144,7 @@ except:
     wm_theme = os.popen("gsettings get org.gnome.desktop.wm.preferences theme").read().strip().replace("'", "")
     icons = os.popen("gsettings get org.gnome.desktop.interface icon-theme").read().strip().replace("'", "")
     gpu = os.popen('''
-    lspci -mm |                                  
+lspci -mm |
                        awk -F '\"|\" \"|\\(' \
                               '/"Display|"3D|"VGA/ {
                                   a[$0] = $1 " " $3 " " ($(NF-1) ~ /^$|^Device [[:xdigit:]]+$/ ? $4 : $(NF-1))
@@ -159,7 +159,7 @@ except:
     console.print(f'''
                                       [bold yellow]User:[/bold yellow] [white]{getpass.getuser()}[/white]
                                       [bold yellow]Host:[/bold yellow] [white]{host} {host_}[/white]
-    [red]██████╗░░█████╗░░██████╗░██████╗[/red]  [bold yellow]OS:[/bold yellow] [white]{platform.system()} {platform.release()} {machine}[/white]
+    [red]██████╗░░█████╗░░██████╗░██████╗[/red]  [bold yellow]OS:[/bold yellow] [white]{os.uname().sysname} {os.uname().nodename.capitalize()} {machine}[/white]
     [red]██╔══██╗██╔══██╗██╔════╝██╔════╝[/red]  [bold yellow]Kernel:[/bold yellow] [white]{kernel}[/white]
     [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Uptime:[/bold yellow] [white]{uptime()}[/white]
     [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Shell:[/bold yellow] [white]{shell}[/white]
