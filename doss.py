@@ -143,19 +143,17 @@ except:
     theme = os.popen("gsettings get org.gnome.desktop.wm.preferences theme").read().strip().replace("'", "")
     wm_theme = os.popen("gsettings get org.gnome.desktop.wm.preferences theme").read().strip().replace("'", "")
     icons = os.popen("gsettings get org.gnome.desktop.interface icon-theme").read().strip().replace("'", "")
-    gpu = os.popen('''
-lspci -mm |
-                       awk -F '\"|\" \"|\\(' \
-                              '/"Display|"3D|"VGA/ {
-                                  a[$0] = $1 " " $3 " " ($(NF-1) ~ /^$|^Device [[:xdigit:]]+$/ ? $4 : $(NF-1))
-                              }
-                              END { for (i in a) {
-                                  if (!seen[a[i]]++) {
-                                      sub("^[^ ]+ ", "", a[i]);
-                                      print a[i]
-                                  }
-                              }}'
-    ''').read().strip()
+    gpu = os.popen("""lspci -mm |
+awk -F '\"|\" \"|\\(' \
+        '/"Display|"3D|"VGA/ {
+            a[$0] = $1 " " $3 " " ($(NF-1) ~ /^$|^Device [[:xdigit:]]+$/ ? $4 : $(NF-1))
+        }
+        END { for (i in a) {
+            if (!seen[a[i]]++) {
+                sub("^[^ ]+ ", "", a[i]);
+                    print a[i]
+            }
+         }}'""").read().strip()
     console.print(f'''
                                       [bold yellow]User:[/bold yellow] [white]{getpass.getuser()}[/white]
                                       [bold yellow]Host:[/bold yellow] [white]{host} {host_}[/white]
