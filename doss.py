@@ -153,7 +153,7 @@ except:
     [red]██║░░██║██║░░██║╚═████╗░╚████═╗░[/red]  [bold yellow]Resolution:[/bold yellow] [white]{resolution}[/white]
     [red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red]  [bold yellow]DE:[/bold yellow] [white]{de.capitalize()}[/white]
     [red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red]  [bold yellow]WM:[/bold yellow] [white]{wm}[/white]
-    [red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red] [bold yellow]WM Theme:[/bold yellow] [white]{wm_theme}[/white]
+    [red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red]  [bold yellow]WM Theme:[/bold yellow] [white]{wm_theme}[/white]
     [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Theme:[/bold yellow] [white]{wm_theme}[/white]
     [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Icons:[/bold yellow] [white]{icons}[/white]
     [red]██║░░██║██║░░██║╚══█══╗░╚══█══╗░[/red]  [bold yellow]CPU:[/bold yellow] [white]{cpuinfo.get_cpu_info()['brand_raw']} @ { cpuinfo.get_cpu_info()['hz_actual_friendly']}[/white]
