@@ -133,7 +133,7 @@ try:
 except:
     ip = requests.get("https://ip.42.pl/json").text
     resolution = os.popen("xrandr -q | grep '\*'").read().strip()
-    print(f'''
+    console.print(f'''
                                       [bold yellow]User:[/bold yellow] {getpass.getuser()}
                                       [bold yellow]Hostname:[/bold yellow] {hostname}
     [red]██████╗░░█████╗░░██████╗░██████╗[/red]  [bold yellow]Model OS:[/bold yellow] {platform.system()} {platform.release()}    
