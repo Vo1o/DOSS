@@ -132,7 +132,7 @@ try:
 ''')
 except:
     ip = requests.get("https://ip.42.pl/json").text
-    resolution = os.system("xrandr -q | grep '\*'")
+    resolution = os.popen("xrandr -q | grep '\*'").read()
     print(f'''
                                       User: {getpass.getuser()}
                                       Hostname: {hostname}
