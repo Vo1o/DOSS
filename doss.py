@@ -134,15 +134,15 @@ except:
     ip = requests.get("https://ip.42.pl/json").text
     resolution = os.popen("xrandr -q | grep '\*'").read().strip()
     print(f'''
-                                      User: {getpass.getuser()}
-                                      Hostname: {hostname}
-    ██████╗░░█████╗░░██████╗░██████╗  Model OS: {platform.system()} {platform.release()}    
-    ██╔══██╗██╔══██╗██╔════╝██╔════╝  Kernel: {distro.name()}
-    ██║░░██║██║░░██║╚═███═╗░╚═███═╗░  Uptime: {uptime()}
-    ██║░░██║██║░░██║╚█████╗░╚█████╗░  Resolution: {resolution}
-    ██║░░██║██║░░██║╚═███═╗░╚═███═╗░  CPU: {cpuinfo.get_cpu_info()['brand_raw']} @ { cpuinfo.get_cpu_info()['hz_actual_friendly']}
-    ██║░░██║██║░░██║░╚═══██╗░╚═══██╗  RAM: {get_size(svmem.available)}/{get_size(svmem.total)} ({round(svmem.used / svmem.total * 100, 2)}%)
-    ██████╔╝╚█████╔╝██████╔╝██████╔╝  Disk {disk_name()}
-    ╚═════╝░░╚════╝░╚═════╝░╚═════╝░  LAN_IP: {local_ip}
-                                      WAN_IP: {ip}                                
+                                      [bold yellow]User:[/bold yellow] {getpass.getuser()}
+                                      [bold yellow]Hostname:[/bold yellow] {hostname}
+    [red]██████╗░░█████╗░░██████╗░██████╗[/red]  [bold yellow]Model OS:[/bold yellow] {platform.system()} {platform.release()}    
+    [red]██╔══██╗██╔══██╗██╔════╝██╔════╝[/red]  [bold yellow]Kernel:[/bold yellow] {distro.name()}
+    [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Uptime:[/bold yellow] {uptime()}
+    [red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red]  [bold yellow]Resolution:[/bold yellow] {resolution}
+    [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]CPU:[/bold yellow] {cpuinfo.get_cpu_info()['brand_raw']} @ { cpuinfo.get_cpu_info()['hz_actual_friendly']}
+    [red]██║░░██║██║░░██║░╚═══██╗░╚═══██╗[/red]  [bold yellow]RAM:[/bold yellow] {get_size(svmem.available)}/{get_size(svmem.total)} ({round(svmem.used / svmem.total * 100, 2)}%)
+    [red]██████╔╝╚█████╔╝██████╔╝██████╔╝[/red]  [bold yellow]Disk:[/bold yellow] {disk_name()}
+    [red]╚═════╝░░╚════╝░╚═════╝░╚═════╝░[/red]  [bold yellow]LAN_IP:[/bold yellow] {local_ip}
+                                      [bold yellow]WAN_IP:[/bold yellow] {ip}                           
     ''')
