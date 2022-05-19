@@ -132,15 +132,31 @@ try:
 ''')
 except:
     ip = requests.get("https://ip.42.pl/json").text
+    machine = os.popen("uname -m").read().strip()
+    host = os.popen("cat /sys/devices/virtual/dmi/id/product_name").read().strip()
+    host_ = os.popen("cat /sys/devices/virtual/dmi/id/product_version").read().strip()
+    kernel = os.popen("uname -r").read().strip()
     resolution = os.popen("xrandr -q | grep '\*'").read().strip()
+    de = os.popen("echo $XDG_CURRENT_DESKTOP").read().strip()
+    shell = os.popen("$SHELL --version").read().strip()
+    wm = os.popen("update-alternatives --list x-window-manager").read().strip().replace("/usr/bin/", "")
+    theme = os.popen("gsettings get org.gnome.desktop.wm.preferences theme").read().strip()
+    wm_theme = os.popen("gsettings get org.gnome.desktop.wm.preferences theme").read().strip()
+    icons = os.popen("gsettings get org.gnome.desktop.interface icon-theme").read().strip()
     console.print(f'''
                                       [bold yellow]User:[/bold yellow] [white]{getpass.getuser()}[/white]
-                                      [bold yellow]Hostname:[/bold yellow] [white]{hostname}[/white]
-    [red]██████╗░░█████╗░░██████╗░██████╗[/red]  [bold yellow]Model OS:[/bold yellow] [white]{platform.system()} {platform.release()}[/white]
-    [red]██╔══██╗██╔══██╗██╔════╝██╔════╝[/red]  [bold yellow]Kernel:[/bold yellow] [white]{distro.name()}[/white]
-    [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Uptime:[/bold yellow] [white]{uptime()}[/white]
-    [red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red]  [bold yellow]Resolution:[/bold yellow] [white]{resolution}[/white]
-    [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]CPU:[/bold yellow] [white]{cpuinfo.get_cpu_info()['brand_raw']} @ { cpuinfo.get_cpu_info()['hz_actual_friendly']}[/white]
+                                      [bold yellow]Host:[/bold yellow] [white]{host} {host_}[/white]
+    [red]██████╗░░█████╗░░██████╗░██████╗[/red]  [bold yellow]OS:[/bold yellow] [white]{platform.system()} {platform.release()} {machine}[/white]
+    [red]██╔══██╗██╔══██╗██╔════╝██╔════╝[/red]  [bold yellow]Kernel:[/bold yellow] [white]{kernel}[/white]
+    [red]██║░░██║██║░░██║╚══█══╗░╚══█══╗░[/red]  [bold yellow]Uptime:[/bold yellow] [white]{uptime()}[/white]
+    [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Shell:[/bold yellow] [white]{shell}[/white]
+    [red]██║░░██║██║░░██║╚═████╗░╚████═╗░[/red]  [bold yellow]Resolution:[/bold yellow] [white]{resolution}[/white]
+    [red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red]  [bold yellow]DE:[/bold yellow] [white]{de.capitalize()}[/white]
+    [red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red]  [bold yellow]WM:[/bold yellow] [white]{wm}[/white]
+    [red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red] [bold yellow]WM Theme:[/bold yellow] [white]{wm_theme}[/white]
+    [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Theme:[/bold yellow] [white]{wm_theme}[/white]
+    [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Icons:[/bold yellow] [white]{icons}[/white]
+    [red]██║░░██║██║░░██║╚══█══╗░╚══█══╗░[/red]  [bold yellow]CPU:[/bold yellow] [white]{cpuinfo.get_cpu_info()['brand_raw']} @ { cpuinfo.get_cpu_info()['hz_actual_friendly']}[/white]
     [red]██║░░██║██║░░██║░╚═══██╗░╚═══██╗[/red]  [bold yellow]RAM:[/bold yellow] [white]{get_size(svmem.available)}/{get_size(svmem.total)} ({round(svmem.used / svmem.total * 100, 2)}%)[/white]
     [red]██████╔╝╚█████╔╝██████╔╝██████╔╝[/red]  [bold yellow]Disk:[/bold yellow] [white]{disk_name()}[/white]
     [red]╚═════╝░░╚════╝░╚═════╝░╚═════╝░[/red]  [bold yellow]LAN_IP:[/bold yellow] [white]{local_ip}[/white]
