@@ -93,10 +93,6 @@ hostname = socket.gethostname()
 local_ip = socket.gethostbyname(hostname)
 svmem = psutil.virtual_memory()
 swap = psutil.swap_memory()
-ip = powershell("Invoke-RestMethod ifconfig.me/ip")
-shell = powershell('"PowerShell v$($PSVersionTable.PSVersion)"')
-color = powershell("('{0}[0;40m{1}{0}{0}[0;40m{1}{0}{0}[0;40m{1}{0}[0;41m{1}{0}[0;41m{1}{0}[0;41m{1}{0}[0;42m{1}{0}[0;42m{1}{0}[0;42m{1}{0}[0;43m{1}{0}[0;43m{1}{0}[0;43m{1}{0}[0;44m{1}{0}[0;44m{1}{0}[0;44m{1}{0}[0;45m{1}{0}[0;45m{1}{0}[0;45m{1}{0}[0;46m{1}{0}[0;46m{1}{0}[0;46m{1}{0}[0;47m{1}{0}[0;47m{1}{0}[0;47m{1}{0}[0m') -f [char]0x1B, '   '")
-color_ = powershell("('{0}[0;100m{1}{0}{0}[0;100m{1}{0}{0}[0;100m{1}{0}[0;101m{1}{0}[0;101m{1}{0}[0;101m{1}{0}[0;102m{1}{0}[0;102m{1}{0}[0;102m{1}{0}[0;103m{1}{0}[0;103m{1}{0}[0;103m{1}{0}[0;104m{1}{0}[0;104m{1}{0}[0;104m{1}{0}[0;105m{1}{0}[0;105m{1}{0}[0;105m{1}{0}[0;106m{1}{0}[0;106m{1}{0}[0;106m{1}{0}[0;107m{1}{0}[0;107m{1}{0}[0;107m{1}{0}[0m') -f [char]0x1B, '   '")
 
 try:
     import wmi
@@ -107,6 +103,11 @@ try:
     cpu = powershell(" Get-WmiObject Win32_Processor | Format-list Name").split(":")[1].replace('\n', '').strip()
     gpu_info = computer.Win32_VideoController()[0]
     model_os = os_info.Name.split("|")[0].replace("Майкрософт ", "").replace("Microsoft", "")
+    ip = powershell("Invoke-RestMethod ifconfig.me/ip")
+    shell = powershell('"PowerShell v$($PSVersionTable.PSVersion)"')
+    color = powershell("('{0}[0;40m{1}{0}{0}[0;40m{1}{0}{0}[0;40m{1}{0}[0;41m{1}{0}[0;41m{1}{0}[0;41m{1}{0}[0;42m{1}{0}[0;42m{1}{0}[0;42m{1}{0}[0;43m{1}{0}[0;43m{1}{0}[0;43m{1}{0}[0;44m{1}{0}[0;44m{1}{0}[0;44m{1}{0}[0;45m{1}{0}[0;45m{1}{0}[0;45m{1}{0}[0;46m{1}{0}[0;46m{1}{0}[0;46m{1}{0}[0;47m{1}{0}[0;47m{1}{0}[0;47m{1}{0}[0m') -f [char]0x1B, '   '")
+    color_ = powershell("('{0}[0;100m{1}{0}{0}[0;100m{1}{0}{0}[0;100m{1}{0}[0;101m{1}{0}[0;101m{1}{0}[0;101m{1}{0}[0;102m{1}{0}[0;102m{1}{0}[0;102m{1}{0}[0;103m{1}{0}[0;103m{1}{0}[0;103m{1}{0}[0;104m{1}{0}[0;104m{1}{0}[0;104m{1}{0}[0;105m{1}{0}[0;105m{1}{0}[0;105m{1}{0}[0;106m{1}{0}[0;106m{1}{0}[0;106m{1}{0}[0;107m{1}{0}[0;107m{1}{0}[0;107m{1}{0}[0m') -f [char]0x1B, '   '")
+
     console.print(f'''
                                   [bold yellow]User[/bold yellow]: [white]{computer_info.UserName}[/white]
                                   [bold yellow]Hostname[/bold yellow]: [white]{proc_info.SystemName}[/white]
@@ -129,16 +130,17 @@ try:
                                   {color_}
 ''')
 except:
+    ip = requests.get("https://ip.42.pl/json").text
     print(f'''
-                                        User: {getpass.getuser()}
-                                        Hostname: {hostname}
-    ██████╗░░█████╗░░██████╗░██████╗    Model OS: {platform.system()} {platform.release()}    
-    ██╔══██╗██╔══██╗██╔════╝██╔════╝    Kernel: {distro.name()}
-    ██║░░██║██║░░██║╚═███═╗░╚═███═╗░    Uptime: {uptime()}
-    ██║░░██║██║░░██║╚█████╗░╚█████╗░    Resolution: {ctypes.windll.user32.GetSystemMetrics(0)}x{ctypes.windll.user32.GetSystemMetrics(1)}
-    ██║░░██║██║░░██║╚═███═╗░╚═███═╗░    CPU: {cpuinfo.get_cpu_info()['brand_raw']} @ { cpuinfo.get_cpu_info()['hz_actual_friendly']}
-    ██║░░██║██║░░██║░╚═══██╗░╚═══██╗    RAM: {get_size(svmem.available)}/{get_size(svmem.total)} ({round(svmem.used / svmem.total * 100, 2)}%)
-    ██████╔╝╚█████╔╝██████╔╝██████╔╝    Disk {disk_name()}
-    ╚═════╝░░╚════╝░╚═════╝░╚═════╝░    LAN_IP: {local_ip}
-                                        WAN_IP: {ip}                                
+                                      User: {getpass.getuser()}
+                                      Hostname: {hostname}
+    ██████╗░░█████╗░░██████╗░██████╗  Model OS: {platform.system()} {platform.release()}    
+    ██╔══██╗██╔══██╗██╔════╝██╔════╝  Kernel: {distro.name()}
+    ██║░░██║██║░░██║╚═███═╗░╚═███═╗░  Uptime: {uptime()}
+    ██║░░██║██║░░██║╚█████╗░╚█████╗░  Resolution: {ctypes.windll.user32.GetSystemMetrics(0)}x{ctypes.windll.user32.GetSystemMetrics(1)}
+    ██║░░██║██║░░██║╚═███═╗░╚═███═╗░  CPU: {cpuinfo.get_cpu_info()['brand_raw']} @ { cpuinfo.get_cpu_info()['hz_actual_friendly']}
+    ██║░░██║██║░░██║░╚═══██╗░╚═══██╗  RAM: {get_size(svmem.available)}/{get_size(svmem.total)} ({round(svmem.used / svmem.total * 100, 2)}%)
+    ██████╔╝╚█████╔╝██████╔╝██████╔╝  Disk {disk_name()}
+    ╚═════╝░░╚════╝░╚═════╝░╚═════╝░  LAN_IP: {local_ip}
+                                      WAN_IP: {ip}                                
     ''')
