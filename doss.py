@@ -120,7 +120,7 @@ try:
 [red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red]  [bold yellow]Uptime[/bold yellow]: [white]{uptime()}[/white]
 [red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red]  [bold yellow]Shell[/bold yellow]: [white]{shell}[/white]
 [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Resolution[/bold yellow]: [white]{ctypes.windll.user32.GetSystemMetrics(0)}x{ctypes.windll.user32.GetSystemMetrics(1)}[/white]
-[red]██║░░██║██║░░██║░╚═══██╗░╚═══██╗[/red]  [bold yellow]CPU[/bold yellow]: [white]{cpu} @ {proc_info.CurrentClockSpeed/1000}GHz[/white]
+[red]██║░░██║██║░░██║░╚═══██╗░╚═══██╗[/red]  [bold yellow]CPU[/bold yellow]: [white]{cpu} @ {proc_info.CurrentClockSpeed/1000}GHz[white]
 [red]██████╔╝╚█████╔╝██████╔╝██████╔╝[/red]  [bold yellow]GPU[/bold yellow]: [white]{gpu_info.Name} {int(gpu_info.MaxRefreshRate*0.1)}GB[/white]
 [red]╚═════╝░░╚════╝░╚═════╝░╚═════╝░[/red]  [bold yellow]RAM[/bold yellow]: [white]{get_size(svmem.available)}/{get_size(svmem.total)} ({round(svmem.used / svmem.total * 100, 2)}%)[/white]
                                   [bold yellow]Disk[/bold yellow]: [white]{disk_name()}[/white]
@@ -140,23 +140,37 @@ except:
     de = os.popen("echo $XDG_CURRENT_DESKTOP").read().strip()
     shell = os.popen("$SHELL --version").read().strip()
     wm = os.popen("update-alternatives --list x-window-manager").read().strip().replace("/usr/bin/", "")
-    theme = os.popen("gsettings get org.gnome.desktop.wm.preferences theme").read().strip()
-    wm_theme = os.popen("gsettings get org.gnome.desktop.wm.preferences theme").read().strip()
-    icons = os.popen("gsettings get org.gnome.desktop.interface icon-theme").read().strip()
+    theme = os.popen("gsettings get org.gnome.desktop.wm.preferences theme").read().strip().replace("'", "")
+    wm_theme = os.popen("gsettings get org.gnome.desktop.wm.preferences theme").read().strip().replace("'", "")
+    icons = os.popen("gsettings get org.gnome.desktop.interface icon-theme").read().strip().replace("'", "")
+    gpu = os.popen('''
+    lspci -mm |                                  
+                       awk -F '\"|\" \"|\\(' \
+                              '/"Display|"3D|"VGA/ {
+                                  a[$0] = $1 " " $3 " " ($(NF-1) ~ /^$|^Device [[:xdigit:]]+$/ ? $4 : $(NF-1))
+                              }
+                              END { for (i in a) {
+                                  if (!seen[a[i]]++) {
+                                      sub("^[^ ]+ ", "", a[i]);
+                                      print a[i]
+                                  }
+                              }}'
+    ''').read().strip()
     console.print(f'''
                                       [bold yellow]User:[/bold yellow] [white]{getpass.getuser()}[/white]
                                       [bold yellow]Host:[/bold yellow] [white]{host} {host_}[/white]
     [red]██████╗░░█████╗░░██████╗░██████╗[/red]  [bold yellow]OS:[/bold yellow] [white]{platform.system()} {platform.release()} {machine}[/white]
     [red]██╔══██╗██╔══██╗██╔════╝██╔════╝[/red]  [bold yellow]Kernel:[/bold yellow] [white]{kernel}[/white]
-    [red]██║░░██║██║░░██║╚══█══╗░╚══█══╗░[/red]  [bold yellow]Uptime:[/bold yellow] [white]{uptime()}[/white]
+    [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Uptime:[/bold yellow] [white]{uptime()}[/white]
     [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Shell:[/bold yellow] [white]{shell}[/white]
-    [red]██║░░██║██║░░██║╚═████╗░╚████═╗░[/red]  [bold yellow]Resolution:[/bold yellow] [white]{resolution}[/white]
+    [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Resolution:[/bold yellow] [white]{resolution}[/white]
     [red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red]  [bold yellow]DE:[/bold yellow] [white]{de.capitalize()}[/white]
     [red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red]  [bold yellow]WM:[/bold yellow] [white]{wm}[/white]
     [red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red]  [bold yellow]WM Theme:[/bold yellow] [white]{wm_theme}[/white]
-    [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Theme:[/bold yellow] [white]{wm_theme}[/white]
+    [red]██║░░██║██║░░██║╚█████╗░╚█████╗░[/red]  [bold yellow]Theme:[/bold yellow] [white]{wm_theme}[/white]
     [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]Icons:[/bold yellow] [white]{icons}[/white]
-    [red]██║░░██║██║░░██║╚══█══╗░╚══█══╗░[/red]  [bold yellow]CPU:[/bold yellow] [white]{cpuinfo.get_cpu_info()['brand_raw']} @ { cpuinfo.get_cpu_info()['hz_actual_friendly']}[/white]
+    [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]CPU:[/bold yellow] [white]{cpuinfo.get_cpu_info()['brand_raw']} @ { cpuinfo.get_cpu_info()['hz_actual_friendly']}[/white]
+    [red]██║░░██║██║░░██║╚═███═╗░╚═███═╗░[/red]  [bold yellow]GPU:[/bold yellow] [white]{gpu}[/white]
     [red]██║░░██║██║░░██║░╚═══██╗░╚═══██╗[/red]  [bold yellow]RAM:[/bold yellow] [white]{get_size(svmem.available)}/{get_size(svmem.total)} ({round(svmem.used / svmem.total * 100, 2)}%)[/white]
     [red]██████╔╝╚█████╔╝██████╔╝██████╔╝[/red]  [bold yellow]Disk:[/bold yellow] [white]{disk_name()}[/white]
     [red]╚═════╝░░╚════╝░╚═════╝░╚═════╝░[/red]  [bold yellow]LAN_IP:[/bold yellow] [white]{local_ip}[/white]
